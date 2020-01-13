@@ -9,7 +9,7 @@ namespace RockPaperScissorsLizardSpock
     public abstract class Player
     {
         public string name;
-        public List<string> gestureOptions = new List<string> { "rock", "paper", "scissors", "lizard", "spock" };
+        public List<string> gestureOptions = new List<string> { "Rock", "Paper", "Scissors", "Lizard", "Spock" };
 
         public abstract string ChooseGesture();
     }

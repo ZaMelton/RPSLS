@@ -12,11 +12,6 @@ namespace RockPaperScissorsLizardSpock
         Player p2;
         string gameTypeChoice;
 
-        public Game()
-        {
-            
-        }
-
         public string ChooseGameType()
         {
             Console.WriteLine("Welcome to the Thunderdome!!! Let's play a game..");
@@ -70,8 +65,10 @@ namespace RockPaperScissorsLizardSpock
 
             if (gameType == "1")
             {
-                string p1Choice = p1.ChooseGesture().ToLower();
-                string p2Choice = p2.ChooseGesture().ToLower();
+                string p1Choice = p1.ChooseGesture();
+                Console.Clear();
+                string p2Choice = p2.ChooseGesture();
+                Console.Clear();
 
                 if (p1Choice == p2Choice)
                 {
@@ -80,18 +77,116 @@ namespace RockPaperScissorsLizardSpock
                 }
 
                 //if choice is rock, rock beats scissors and lizard
-                else if (p1Choice == "rock")
+                else if (p1Choice == "Rock")
                 {
-                    if (p2Choice == "scissors")
+                    if (p2Choice == "Scissors")
                     {
-                        Console.WriteLine("Congrats " + p1.name + " you won this round!");
+                        Console.WriteLine($"Congrats {p1.name} you won this round!");
                         Console.WriteLine("Rock crushes Scissors!");
                         Console.ReadLine();
                     }
-                    else if (p2Choice == "lizard")
+                    else if (p2Choice == "Lizard")
                     {
-                        Console.WriteLine("Congrats " + p1.name + " you won this round!");
+                        Console.WriteLine($"Congrats {p1.name} you won this round!");
                         Console.WriteLine("Rock smashes Lizard!");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Congrats {p2.name} you won this round!");
+                        Console.WriteLine($"{p2Choice} beats {p1Choice}");
+                        Console.ReadLine();
+                    }
+                }
+
+                //if choice is paper, paper beats rock and spock
+                else if (p1Choice == "paper")
+                {
+                    if (p2Choice == "Rock")
+                    {
+                        Console.WriteLine($"Congrats {p1.name} you won this round!");
+                        Console.WriteLine("Paper covers rock!");
+                        Console.ReadLine();
+                    }
+                    else if (p2Choice == "Spock")
+                    {
+                        Console.WriteLine($"Congrats {p1.name} you won this round!");
+                        Console.WriteLine("Paper disproves Spock!");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Congrats {p2.name} you won this round!");
+                        Console.WriteLine($"{p2Choice} beats {p1Choice}");
+                        Console.ReadLine();
+                    }
+                }
+
+                //if choice is scissors, scissors beats paper and lizard
+                else if (p1Choice == "Scissors")
+                {
+                    if (p2Choice == "Paper")
+                    {
+                        Console.WriteLine($"Congrats {p1.name} you won this round!");
+                        Console.WriteLine("Scissors cuts Paper!");
+                        Console.ReadLine();
+                    }
+                    else if (p2Choice == "Lizard")
+                    {
+                        Console.WriteLine($"Congrats {p1.name} you won this round!");
+                        Console.WriteLine("Scissors decapitates Lizard!");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Congrats {p2.name} you won this round!");
+                        Console.WriteLine($"{p2Choice} beats {p1Choice}");
+                        Console.ReadLine();
+                    }
+                }
+
+                //if choice is lizard, lizard beats paper and spock
+                else if (p1Choice == "Lizard")
+                {
+                    if (p2Choice == "Paper")
+                    {
+                        Console.WriteLine($"Congrats {p1.name} you won this round!");
+                        Console.WriteLine("Lizard eats Paper!");
+                        Console.ReadLine();
+                    }
+                    else if (p2Choice == "Spock")
+                    {
+                        Console.WriteLine($"Congrats {p1.name} you won this round!");
+                        Console.WriteLine("Lizard poisons Spock!");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Congrats {p2.name} you won this round!");
+                        Console.WriteLine($"{p2Choice} beats {p1Choice}");
+                        Console.ReadLine();
+                    }
+                }
+
+                //if choice is spock, spock beats rock and scissors
+                else if (p1Choice == "Spock")
+                {
+                    if (p2Choice == "Rock")
+                    {
+                        Console.WriteLine($"Congrats {p1.name} you won this round!");
+                        Console.WriteLine("Spock vaporizes Rock!");
+                        Console.ReadLine();
+                    }
+                    else if (p2Choice == "Scissors")
+                    {
+                        Console.WriteLine($"Congrats {p1.name} you won this round!");
+                        Console.WriteLine("Spock breaks Scissors!");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Congrats {p2.name} you won this round!");
+                        Console.WriteLine($"{p2Choice} beats {p1Choice}");
                         Console.ReadLine();
                     }
                 }
