@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissorsLizardSpock
 {
-    class Player
+    public abstract class Player
     {
+        public string name;
+        public List<string> gestureOptions = new List<string> { "rock", "paper", "scissors", "lizard", "spock" };
 
+        public abstract string ChooseGesture();
     }
 }
