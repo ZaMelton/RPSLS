@@ -11,6 +11,7 @@ namespace RockPaperScissorsLizardSpock
         public Bot()
         {
             name = "Megamind";
+            wins = 0;
         }
 
         public override string ChooseGesture()
