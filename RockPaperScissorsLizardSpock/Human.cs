@@ -30,7 +30,7 @@ namespace RockPaperScissorsLizardSpock
 
             do
             {
-                playerChoice = Console.ReadLine().ToLower();
+                playerChoice = Console.ReadLine();
                 switch (playerChoice)
                 {
                     case "1":

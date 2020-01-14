@@ -8,9 +8,9 @@ namespace RockPaperScissorsLizardSpock
 {
     class Bot : Player
     {
-        public Bot()
+        public Bot(string name)
         {
-            name = "Megamind";
+            this.name = name;
             wins = 0;
         }
 
