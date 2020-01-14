@@ -14,9 +14,8 @@ namespace RockPaperScissorsLizardSpock
         string gameTypeChoice;
 
 
-        public string ChooseGameType()
+        public void ChooseGameType()
         {
-            Console.WriteLine("Welcome to the Thunderdome!!! Let's play a game..");
             Console.WriteLine("What is your name?");
             string p1Name = Console.ReadLine();
             p1 = new Human(p1Name);
@@ -42,7 +41,7 @@ namespace RockPaperScissorsLizardSpock
                             p2 = new Human(p2Name);
                             Console.WriteLine();
                             Console.WriteLine($"Welcome to the Thunderdome, {p2.name}.");
-                            Thread.Sleep(1300);
+                            Thread.Sleep(1800);
                             Console.Clear();
                             validInput = true;
                             break;
@@ -63,13 +62,10 @@ namespace RockPaperScissorsLizardSpock
                             break;
                         }
                 }
-
             } while (!(validInput));
-
-            return gameTypeChoice;
         }
 
-        public string ChooseGameRounds()
+        public int ChooseGameRounds()//Better way to do this method?????
         {
             int shortGame = 3;
             int mediumGame = 5;
@@ -88,29 +84,29 @@ namespace RockPaperScissorsLizardSpock
                         {
                             Console.WriteLine($"You have chosen to play {shortGame} rounds.");
                             validInput = true;
-                            break;
+                            return shortGame;
                         }
                     case "2":
                         {
                             Console.WriteLine($"You have chosen to play {mediumGame} rounds.");
                             validInput = true;
-                            break;
+                            return mediumGame;
                         }
                     case "3":
                         {
                             Console.WriteLine($"You have chosen to play {longGame} rounds.");
                             validInput = true;
-                            break;
+                            return longGame;
                         }
                     default:
                         {
                             Console.WriteLine("Please choose a valid input.");
+                            roundChoice = Console.ReadLine();
                             break;
                         }
                 }
             } while (!(validInput));
-
-            return roundChoice;
+            return 0;
         }
 
         public void PlayerOneWin()
@@ -131,153 +127,153 @@ namespace RockPaperScissorsLizardSpock
             Console.Clear();
         }
 
-        public void PlayGame()
+        public void DisplayRules()
         {
-            int gameRounds = Int32.Parse(ChooseGameRounds());
-            Console.Clear();
+            Console.WriteLine("Welcome to the Thunderdome!!! Let's play a game..");
+            Console.WriteLine("It's called Rock, Paper, Scissors, Lizard, Spock");
+            Console.WriteLine("The rules are the same for your typical game of Rock, Paper, Scissors,");
+            Console.WriteLine("except now there are two extra options: Spock and Lizard");
+            Console.WriteLine("Spock will win against Rock and Scissors, but lose against Lizard and Paper.");
+            Console.WriteLine("Lizard will win against Spock and Paper, but lose against Scissors and Rock.");
+            Console.WriteLine("That's enought rules, let's play!");
+        }
 
-            do
+        public void DetermineRoundWinner(string p1Choice, string p2Choice)
+        {
+            if (p1Choice == p2Choice)
             {
-                string p1Choice = p1.ChooseGesture();
-                Console.Clear();
-                string p2Choice = p2.ChooseGesture();
-                Console.Clear();
+                Console.WriteLine("You tied!");
+            }
 
-                Console.WriteLine($"{p1.name} chose: {p1Choice}\n{p2.name} chose: {p2Choice}");
-                Console.WriteLine();
-
-                if (p1Choice == p2Choice)
+            //if choice is rock, rock beats scissors and lizard, rock loses to Paper and Spock
+            else if (p1Choice == "Rock")
+            {
+                if (p2Choice == "Paper")
                 {
-                    Console.WriteLine("You tied!");
+                    Console.WriteLine("Paper covers Rock!");
+                    PlayerTwoWin();
                 }
-
-                //if choice is rock, rock beats scissors and lizard, rock loses to Paper and Spock
-                else if (p1Choice == "Rock")
+                else if (p2Choice == "Scissors")
                 {
-                    if (p2Choice == "Paper")
-                    {
-                        Console.WriteLine("Paper covers Rock!");
-                        PlayerTwoWin();
-                    }
-                    else if (p2Choice == "Scissors")
-                    {
-                        Console.WriteLine("Rock crushes Scissors!");
-                        PlayerOneWin();
-                    }
-                    else if (p2Choice == "Lizard")
-                    {
-                        Console.WriteLine("Rock smashes Lizard!");
-                        PlayerOneWin();
-                    }
-                    else if (p2Choice == "Spock")
-                    {
-                        Console.WriteLine("Spock vaporizes Rock!");
-                        PlayerTwoWin();
-                    }
+                    Console.WriteLine("Rock crushes Scissors!");
+                    PlayerOneWin();
                 }
-
-                //if choice is paper, paper beats rock and spock, paper loses to Scissors and Lizard
-                else if (p1Choice == "Paper")
+                else if (p2Choice == "Lizard")
                 {
-                    if (p2Choice == "Rock")
-                    {
-                        Console.WriteLine("Paper covers Rock!");
-                        PlayerOneWin();
-                    }
-                    else if (p2Choice == "Scissors")
-                    {
-                        Console.WriteLine("Scissors cuts Paper!");
-                        PlayerTwoWin();
-                    }
-                    else if (p2Choice == "Lizard")
-                    {
-                        Console.WriteLine("Lizard eats Paper");
-                        PlayerTwoWin();
-                    }
-                    else if (p2Choice == "Spock")
-                    {
-                        Console.WriteLine("Paper disproves Spock");
-                        PlayerOneWin();
-                    }
+                    Console.WriteLine("Rock smashes Lizard!");
+                    PlayerOneWin();
                 }
-
-                //if choice is scissors, scissors beats paper and lizard, scissors loses to rock and spock
-                else if (p1Choice == "Scissors")
+                else if (p2Choice == "Spock")
                 {
-                    if (p2Choice == "Rock")
-                    {
-                        Console.WriteLine("Rock crushes Scissors!");
-                        PlayerTwoWin();
-                    }
-                    else if (p2Choice == "Paper")
-                    {
-                        Console.WriteLine("Scissors cuts Paper!");
-                        PlayerOneWin();
-                    }
-                    else if (p2Choice == "Lizard")
-                    {
-                        Console.WriteLine("Scissors decapitates Lizard!");
-                        PlayerOneWin();
-                    }
-                    else if (p2Choice == "Spock")
-                    {
-                        Console.WriteLine("Spock smashes Scissors!");
-                        PlayerTwoWin();
-                    }
+                    Console.WriteLine("Spock vaporizes Rock!");
+                    PlayerTwoWin();
                 }
+            }
 
-                //if choice is lizard, lizard beats paper and spock, lizard loses to rock and scissors
-                else if (p1Choice == "Lizard")
+            //if choice is paper, paper beats rock and spock, paper loses to Scissors and Lizard
+            else if (p1Choice == "Paper")
+            {
+                if (p2Choice == "Rock")
                 {
-                    if (p2Choice == "Rock")
-                    {
-                        Console.WriteLine("Rock smashes Lizard!");
-                        PlayerTwoWin();
-                    }
-                    else if (p2Choice == "Paper")
-                    {
-                        Console.WriteLine("Lizard eats Paper!");
-                        PlayerOneWin();
-                    }
-                    else if (p2Choice == "Scissors")
-                    {
-                        Console.WriteLine("Scissors decapitates Lizard!");
-                        PlayerTwoWin();
-                    }
-                    else if (p2Choice == "Spock")
-                    {
-                        Console.WriteLine("Lizard poisons Spock!");
-                        PlayerOneWin();
-                    }
+                    Console.WriteLine("Paper covers Rock!");
+                    PlayerOneWin();
                 }
-
-                //if choice is spock, spock beats rock and scissors, spock loses to lizard and paper
-                else if (p1Choice == "Spock")
+                else if (p2Choice == "Scissors")
                 {
-                    if (p2Choice == "Rock")
-                    {
-                        Console.WriteLine("Spock vaporizes Rock!");
-                        PlayerOneWin();
-                    }
-                    else if (p2Choice == "Paper")
-                    {
-                        Console.WriteLine("Paper disproves Spock!");
-                        PlayerTwoWin();
-                    }
-                    else if (p2Choice == "Lizard")
-                    {
-                        Console.WriteLine("Lizard poisons Spock!");
-                        PlayerTwoWin();
-                    }
-                    else if (p2Choice == "Scissors")
-                    {
-                        Console.WriteLine("Spock smashes Scissors!");
-                        PlayerOneWin();
-                    }
+                    Console.WriteLine("Scissors cuts Paper!");
+                    PlayerTwoWin();
                 }
-            } while (p1.wins < ((gameRounds / 2) + 1) && p2.wins < ((gameRounds / 2) + 1));
+                else if (p2Choice == "Lizard")
+                {
+                    Console.WriteLine("Lizard eats Paper");
+                    PlayerTwoWin();
+                }
+                else if (p2Choice == "Spock")
+                {
+                    Console.WriteLine("Paper disproves Spock");
+                    PlayerOneWin();
+                }
+            }
 
-            if (p1.wins == ((gameRounds / 2) + 1))
+            //if choice is scissors, scissors beats paper and lizard, scissors loses to rock and spock
+            else if (p1Choice == "Scissors")
+            {
+                if (p2Choice == "Rock")
+                {
+                    Console.WriteLine("Rock crushes Scissors!");
+                    PlayerTwoWin();
+                }
+                else if (p2Choice == "Paper")
+                {
+                    Console.WriteLine("Scissors cuts Paper!");
+                    PlayerOneWin();
+                }
+                else if (p2Choice == "Lizard")
+                {
+                    Console.WriteLine("Scissors decapitates Lizard!");
+                    PlayerOneWin();
+                }
+                else if (p2Choice == "Spock")
+                {
+                    Console.WriteLine("Spock smashes Scissors!");
+                    PlayerTwoWin();
+                }
+            }
+
+            //if choice is lizard, lizard beats paper and spock, lizard loses to rock and scissors
+            else if (p1Choice == "Lizard")
+            {
+                if (p2Choice == "Rock")
+                {
+                    Console.WriteLine("Rock smashes Lizard!");
+                    PlayerTwoWin();
+                }
+                else if (p2Choice == "Paper")
+                {
+                    Console.WriteLine("Lizard eats Paper!");
+                    PlayerOneWin();
+                }
+                else if (p2Choice == "Scissors")
+                {
+                    Console.WriteLine("Scissors decapitates Lizard!");
+                    PlayerTwoWin();
+                }
+                else if (p2Choice == "Spock")
+                {
+                    Console.WriteLine("Lizard poisons Spock!");
+                    PlayerOneWin();
+                }
+            }
+
+            //if choice is spock, spock beats rock and scissors, spock loses to lizard and paper
+            else if (p1Choice == "Spock")
+            {
+                if (p2Choice == "Rock")
+                {
+                    Console.WriteLine("Spock vaporizes Rock!");
+                    PlayerOneWin();
+                }
+                else if (p2Choice == "Paper")
+                {
+                    Console.WriteLine("Paper disproves Spock!");
+                    PlayerTwoWin();
+                }
+                else if (p2Choice == "Lizard")
+                {
+                    Console.WriteLine("Lizard poisons Spock!");
+                    PlayerTwoWin();
+                }
+                else if (p2Choice == "Scissors")
+                {
+                    Console.WriteLine("Spock smashes Scissors!");
+                    PlayerOneWin();
+                }
+            }
+        }
+
+        public void DisplayWinner(int wins, int roundsToWin)
+        {
+            if (wins == roundsToWin)
             {
                 Console.WriteLine($"{p1.name} wins!");
                 Console.ReadLine();
@@ -288,6 +284,64 @@ namespace RockPaperScissorsLizardSpock
                 Console.ReadLine();
 
             }
+        }
+
+        public bool AskToPlayAgain()
+        {
+            Console.WriteLine("Would you like to play again? [Y] or [N]");
+            string playAgainChoice = Console.ReadLine().ToLower();
+
+            while (playAgainChoice != "y" && playAgainChoice != "n")
+            {
+                Console.WriteLine("Please choose [Y] or [N]");
+                playAgainChoice = Console.ReadLine();
+            }
+
+            if (playAgainChoice == "y")
+            {
+                p1.wins = 0;
+                p2.wins = 0;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void PlayGame()
+        {
+            DisplayRules();
+            ChooseGameType();
+
+            bool playGame;
+            do
+            {
+                int gameRounds = ChooseGameRounds();
+                int roundsToWin = (gameRounds / 2) + 1;
+                Console.Clear();
+
+                while (!(p1.wins == roundsToWin) && !(p2.wins == roundsToWin))
+                {
+                    string p1Choice = p1.ChooseGesture();
+                    Console.Clear();
+                    string p2Choice = p2.ChooseGesture();
+                    Console.Clear();
+
+                    Console.WriteLine($"{p1.name} chose: {p1Choice}\n{p2.name} chose: {p2Choice}");
+                    Console.WriteLine();
+
+                    DetermineRoundWinner(p1Choice, p2Choice);
+
+                    Console.WriteLine($"{p1.name} {p1.wins} - {p2.wins} {p2.name}");
+                    Console.WriteLine();
+                }
+
+                DisplayWinner(p1.wins, roundsToWin);
+
+                playGame = AskToPlayAgain();
+
+            } while (playGame == true);
         }
     }
 }

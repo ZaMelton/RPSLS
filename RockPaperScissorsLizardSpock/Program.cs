@@ -12,8 +12,6 @@ namespace RockPaperScissorsLizardSpock
         {
             Game rpsls = new Game();
 
-            string gameTypeChoice = rpsls.ChooseGameType();
-
             rpsls.PlayGame();
 
         }
